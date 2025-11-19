@@ -117,6 +117,13 @@ app.all('*', (req,res, next)=>{
   next(new ExpressError(404,"page Not exist"));
 })
 
+//Delete Review Route
+app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
+  let {id, reviewId} = req.params;
+  await Listing.findByIdAndUpdate(id, {$pull: {reviews: reviewId}})
+  await Review.findByIdAndDelete(reviewId);
+   red.redirect(`/listings/${id}` )
+}))
 // Error handling middleware
 app.use((err, req, res, next) => {
   let {statusCode=500, message="something went wrong"} =  err;
