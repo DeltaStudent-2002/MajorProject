@@ -61,15 +61,15 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-app.get("/demouser", async (req, res) => {
-  let fakeUser = new User({
-    email: "maheshdhondge26@gmail.com",
-    username: "delta-student",   // ❗ fixed typo
-  });
+// app.get("/demouser", async (req, res) => {
+//   let fakeUser = new User({
+//     email: "maheshdhondge26@gmail.com",
+//     username: "delta-student",   // ❗ fixed typo
+//   });
 
-  let registeredUser = await User.register(fakeUser, "helloWorld");
-  res.send(registeredUser);
-});
+//   let registeredUser = await User.register(fakeUser, "helloWorld");
+//   res.send(registeredUser);
+// });
 
 // -------------------- 404 HANDLER --------------------
 app.all('*', (req,res,next)=>{
