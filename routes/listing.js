@@ -4,6 +4,11 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing.js");
 const ExpressError = require("../utils/ExpressError.js")
 const {listingSchema} = require("../schema.js");
+const flash = require("connect-flash");
+
+const listingController = require("../controllers/listings.js")
+
+router.use(flash());
 const validateListing = (req,res, next)=>{
   let{error} = listingSchema.validate(req.body);
   if(error){
@@ -15,13 +20,14 @@ const validateListing = (req,res, next)=>{
 }
 
 // Index Route
-router.get("/", wrapAsync(async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index.ejs", { allListings });
-}));
+router.get("/", wrapAsync(listingController.index));
 
 // New Route
 router.get("/new", (req, res) => {
+  if(!req.isAuthenticated()){
+     req.flash("error", "you must be loggd in create listings");
+     return res.redirect("/login");
+  }
   res.render("listings/new.ejs");
 });
 
