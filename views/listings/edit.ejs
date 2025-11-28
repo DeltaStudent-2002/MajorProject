@@ -7,17 +7,17 @@
       action="/listings/<%= listing._id %>?_method=PUT"
       nonvalidate
       class="needs-validation"
+      enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="title" class="form-label">Upload New Image</label>
         <input
           name="listing[title]"
-          value="<%= listing.title %>"
-          type="text"
+          type="file"
           class="form-control"
-          required
+          
         />
-        <div class="valid-feedback">Title look good!</div>
+        
       </div>
 
       <div class="mb-3">

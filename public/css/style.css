@@ -5,7 +5,7 @@ body {
   min-height: 100vh;
 }
 
-.container{
+.container {
   flex: 1;
 }
 
@@ -24,21 +24,21 @@ body {
 }
 
 /* footer */
-.f-info-links{
+.f-info-links {
   width: 100%;
 }
 
-.f-info-links{
+.f-info-links {
   width: 100%;
   font-size: 1.2rem;
-  margin-right:1rem;
+  margin-right: 1rem;
 }
-.f-info-links a{
+.f-info-links a {
   text-decoration: none;
   color: #222222;
 }
 
-.f-info-links a:hover{
+.f-info-links a:hover {
   text-decoration: underline;
 }
 
@@ -106,12 +106,17 @@ body {
 }
 
 /* New Page */
-.add-btn{
+.add-btn {
   background-color: #fe424d;
   border: none !important;
 }
 /* Edit Page */
-.edit-btn{
+.edit-btn {
   background-color: #fe424d;
   border: none !important;
+}
+/* Map */
+#map {
+  height: 400px;
+  width: 90vh;
 }
