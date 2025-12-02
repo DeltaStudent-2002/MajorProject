@@ -14,7 +14,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.js");
 const MongoStore = require("connect-mongo");
-
 const session = require("express-session");
 const ExpressError = require("./utils/ExpressError.js");
 const flash = require("connect-flash");
@@ -40,11 +39,12 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: Date.now()+7*24*60*60*1000,
-    maxAge: 7*24*60*60*1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-  }
+  },
 };
+
+
 
 
 app.use(session(sessionOptions));   // ✅ only once
