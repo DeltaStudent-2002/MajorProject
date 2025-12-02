@@ -10,14 +10,15 @@
       enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <label for="title" class="form-label">Upload New Image</label>
+        <label for="title" class="form-label">Title</label>
         <input
           name="listing[title]"
-          type="file"
+          value="<%= listing.title %>"
+          type="text"
           class="form-control"
-          
+          required
         />
-        
+        <div class="valid-feedback">Title look good!</div>
       </div>
 
       <div class="mb-3">
@@ -27,14 +28,21 @@
         >
         <div class="invalid-feedback">Please enter a short description</div>
       </div>
+        <div >
+           Original Listing Image
+          <img src="<%= listing.image.url %>" alt="" class="card-img-top"
+        alt="listing_image"
+        style="height: 20rem">
+        </div>
+         
+        
+
       <div class="mb-3">
-        <label for="title" class="form-label">Image Link</label>
+        <label for="title" class="form-label">Upload New Image</label>
         <input
           name="listing[image]"
-          value="<%= listing.image.url %>"
-          type="text"
+          type="file"
           class="form-control"
-          required
         />
         <div class="invalid-feedback">Please enter a valid link</div>
       </div>

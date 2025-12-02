@@ -1,3 +1,4 @@
+
 if(process.env.NODE_ENV != "production"){
 require('dotenv').config();  
 
@@ -12,6 +13,8 @@ const ejsMate = require("ejs-mate");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.js");
+const MongoStore = require("connect-mongo");
+
 const session = require("express-session");
 const ExpressError = require("./utils/ExpressError.js");
 const flash = require("connect-flash");
@@ -19,17 +22,19 @@ const userRouter = require("./routes/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js")
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+
 const dbUrl = process.env.ATLASDB_URL;
 main()
   .then(() => console.log("✅ Connected to DB"))
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 // -------------------- SESSION --------------------
+
+
 const sessionOptions = {
   secret: "mysupersecretstring",
   resave: false,
@@ -40,6 +45,7 @@ const sessionOptions = {
     httpOnly: true,
   }
 };
+
 
 app.use(session(sessionOptions));   // ✅ only once
 app.use(flash());
@@ -74,17 +80,20 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// app.get("/demouser", async (req, res) => {
-//   let fakeUser = new User({
-//     email: "maheshdhondge26@gmail.com",
-//     username: "delta-student",   
-//   });
+app.get("/demouser", async (req, res) => {
+  let fakeUser = new User({
+    email: "maheshdhondge26@gmail.com",
+    username: "delta-student",   
+  });
 
-//   let registeredUser = await User.register(fakeUser, "helloWorld");
-//   res.send(registeredUser);
-// });
+  let registeredUser = await User.register(fakeUser, "helloWorld");
+  res.send(registeredUser);
+});
 
-// -------------------- 404 HANDLER --------------------
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
+
 app.all('*', (req,res,next)=>{
   next(new ExpressError(404,"Page Not Exist"));
 });
