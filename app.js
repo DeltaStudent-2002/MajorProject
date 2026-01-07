@@ -1,7 +1,6 @@
 
 if(process.env.NODE_ENV != "production"){
-require('dotenv').config();  
-
+  require('dotenv').config();  
 }
 const express = require("express");
 const app = express();
@@ -31,10 +30,17 @@ async function main() {
   await mongoose.connect(dbUrl);
 }
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto:{
+    secret: "mysupersecretcode",
+  },
+  touchAfter: 24*3600,
+});
+
 // -------------------- SESSION --------------------
-
-
 const sessionOptions = {
+  store,
   secret: "mysupersecretstring",
   resave: false,
   saveUninitialized: false,
@@ -47,7 +53,7 @@ const sessionOptions = {
 
 
 
-app.use(session(sessionOptions));   // ✅ only once
+app.use(session(sessionOptions));  
 app.use(flash());
 
 // -------------------- VIEW ENGINE --------------------
@@ -105,6 +111,6 @@ app.use((err, req, res, next) => {
 });
 
 // -------------------- SERVER --------------------
-app.listen(8000, () => {
-  console.log("🚀 Server is listening on port 8080"); 
+app.listen(8040, () => {
+  console.log("🚀 Server is listening on port 8040"); 
 });
