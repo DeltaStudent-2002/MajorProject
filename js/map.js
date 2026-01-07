@@ -1,6 +1,7 @@
 
+    let mapToken =" <%=process.env.MAP_TOKEN %>";
     mapboxgl.accessToken = mapToken;
-        console.log(mapToken);
+    console.log(mapToken);
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v12', // style URL
