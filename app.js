@@ -10,7 +10,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const session = require("express-session");
 const ExpressError = require("./utils/ExpressError.js");
@@ -19,7 +19,7 @@ const userRouter = require("./routes/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js")
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = "mongodb+srv://maheshdhondge26_db_user:57479979@cluster0.iqk3ybx.mongodb.net/wanderlust?retryWrites=true&w=majority&appName=Cluster0";
 const dbUrl = process.env.ATLASDB_URL;
 main()
   .then(() => console.log("✅ Connected to DB"))
@@ -97,5 +97,5 @@ app.use((err, req, res, next) => {
 
 // -------------------- SERVER --------------------
 app.listen(8000, () => {
-  console.log("🚀 Server is listening on port 8080"); 
+  console.log("🚀 Server is listening on port 8000"); 
 });
