@@ -15,12 +15,21 @@
         <label for="title" class="form-label">Title</label>
         <input
           name="listing[title]"
+<<<<<<< HEAD
           type="text"
           class="form-control"
           value="<%= listing.title %>"
           required
         />
         <div class="invalid-feedback">Please enter a title</div>
+=======
+          value="<%= listing.title %>"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Title look good!</div>
+>>>>>>> 3b6f93799569f507d9882b0cdb8b7c163c88e83b
       </div>
 
       <!-- Description -->
@@ -33,6 +42,7 @@
         ><%= listing.description %></textarea>
         <div class="invalid-feedback">Please enter a description</div>
       </div>
+<<<<<<< HEAD
 
       <!-- Image URL -->
       <div class="mb-3">
@@ -43,6 +53,23 @@
           class="form-control"
           value="<%= listing.image ? listing.image.url : '' %>"
           required
+=======
+        <div >
+           Original Listing Image
+          <img src="<%= listing.image.url %>" alt="" class="card-img-top"
+        alt="listing_image"
+        style="height: 20rem">
+        </div>
+         
+        
+
+      <div class="mb-3">
+        <label for="title" class="form-label">Upload New Image</label>
+        <input
+          name="listing[image]"
+          type="file"
+          class="form-control"
+>>>>>>> 3b6f93799569f507d9882b0cdb8b7c163c88e83b
         />
         <div class="invalid-feedback">Please enter a valid image URL</div>
       </div>
