@@ -1,7 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 <script>
-  const mapToken = "<%=process.env.MAP_TOKEN%>";
-  const listing = <%- JSON.stringify(listing)%>;
+  const mapToken = "<%=process.env.Map_TOKEN%>";
 </script>
   <!-- Listing Title -->
   <div class="col-8 offset-2 mt-3">
@@ -18,7 +17,6 @@
 
 
     <div class="card-body">
-
       <p class="card-text">Owned By: <i><%= listing.owner.username %></i></p>
       <p class="card-text"> <%= listing.description %></p>
       <p class="card-text">Price: ₹<%= listing.price %></p>
@@ -28,11 +26,7 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-  <% if (currUser && currUser._id.equals(listing.owner)) { %>
-=======
-
->>>>>>> 3b6f93799569f507d9882b0cdb8b7c163c88e83b
+  <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
     <div class="btns mt-3">
 
       <!-- Edit -->
@@ -47,11 +41,12 @@
       </form>
 
     </div>
-
+  <% } %>
 
 </div>
 
-&nbsp;
+<hr />
+
 <!-- Review Form -->
 <div class="col-8 offset-2 mb-3">
   <h4>Leave a Review</h4>
@@ -95,7 +90,7 @@
   </form>
 </div>
 
-&nbsp;
+<hr />
 
 <!-- All Reviews -->
 <div class="col-8 offset-2">
@@ -141,6 +136,5 @@
   <h3>Where you'll be</h3>
   <div id="map"></div>
   </div>
-</div>
 <script src="/js/map.js"></script>
 
