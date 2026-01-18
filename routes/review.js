@@ -1,9 +1,9 @@
 const express = require("express");
-const router = express.Router({ mergeParams: true }); 
+const router = express.Router({ mergeParams: true }); // ⭐ MUST HAVE
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { reviewSchema } = require("../schema.js");
-const Review = require("../models/review.js"); 
+const Review = require("../models/review.js"); // ⭐ FIXED PATH
 const Listing = require("../models/listing.js");
 
 const reviewController = require("../controllers/reviews.js");

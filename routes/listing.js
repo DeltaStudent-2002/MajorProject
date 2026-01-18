@@ -25,7 +25,7 @@ const validateListing = (req, res, next) => {
   }
 };
 
-// INDEX 
+// INDEX + CREATE
 router
   .route("/")
   .get(wrapAsync(listingController.index))
@@ -36,10 +36,10 @@ router
     wrapAsync(listingController.createListing)
   );
 
-// ✅ NEW ROUTE
+// ✅ NEW ROUTE MUST COME BEFORE ANY :id ROUTES
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-// EDIT ROUTE 
+// EDIT ROUTE (must come before :id too)
 router.get("/:id/edit", isLoggedIn, wrapAsync(listingController.renderEditForm));
 
 // SHOW + UPDATE + DELETE

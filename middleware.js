@@ -1,25 +1,16 @@
-module.exports.isLoggedIn=(req,res, next)=>{
-    console.log(req.path,"..", req.originalUrl);
-    if(!req.isAuthenticated()){
-      req.session.redirectUrl = req.originalUrl;
-     req.flash("error", "you must be loggd in create listings");
-     return res.redirect("/login");
+module.exports.savedRedirectUrl = (req, res, next) => {
+  if (req.session.returnTo) {
+    res.locals.returnTo = req.session.returnTo;
   }
   next();
-}
+};
 
-module.exports.savedRedirectUrl = (req, res, next)=>{
-  if(req.session.redirectUrl){
-    res.locals.redirectUrl = req.session.redirectUrl;
+// Optional: middleware to require login for certain routes
+module.exports.isLoggedIn = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    req.session.returnTo = req.originalUrl; // save url
+    req.flash("error", "You must be logged in first!");
+    return res.redirect("/login");
   }
   next();
-}
-
-module.exports.isOwner = (req,res,next)=>{
-  let { id } = req.params;
-  if(!listing.owner.equals(currUser._id)){
-    req.flash("error", "you don't have permission to edit");
-    res.redirect(`/listings/${id}`);
-  }
-  next();
-}
+};
